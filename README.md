@@ -1,27 +1,69 @@
-# Final Project – Analyzing Key Factors Influencing Volatility in Major Technology Stocks: AAPL, MSFT, NVDA, TSLA and AMZN
+# DSCI 510 – Final Project (Fall 2025) – Analyzing Key Factors Influencing Volatility in Major Technology Stocks: AAPL, MSFT, NVDA, TSLA and AMZN
 
 ## Author
+```text
 Aphinya Chokwareephorn
 USCID: 9637644926
 Email: chokware@usc.edu
-DSCI 510 – Final Project (Fall 2025)
+```
 
-This project analyzes volatility patterns in five major technology stocks—AAPL, MSFT, NVDA, TSLA, and AMZN—using historical daily data from January 2021 to December 2025. The workflow retrieves raw data programmatically, processes and cleans the datasets, performs quantitative analysis, and generates visualizations to compare risk profiles across companies.
+## Project Summary
+This project analyzes volatility patterns in five major technology stocks—Apple (AAPL), Microsoft (MSFT), NVIDIA (NVDA), Tesla (TSLA), and Amazon (AMZN)—using historical daily market data from 2021 to 2025.
 
-## Project Overview
-Technology stocks vary significantly in price stability, risk exposure, and response to market conditions.
-This project investigates:
-- How volatility differs among major tech stocks 
-- How these volatility patterns evolve over time 
-- Which stocks are most stable vs. most volatile
-- How correlations reveal shared market behavior
+Key analyses include:
+- Daily returns
+- Distribution of returns
+- 30-day rolling volatility
+- Annualized volatility
+- Correlation across stocks
 
-The analysis combines daily returns, rolling volatility, annualized volatility, return distributions, and correlation matrices to assess each company’s risk profile.
+The goal is to compare risk profiles, identify high-volatility periods, and understand how these assets behave relative to one another. The project uses fully automated data collection via the yfinance library.
 ---
 
-## 1. Virtual Environment Setup
+## 1. Repository Structure
+```text
+DSCI510_final_project/
+├── data/
+│   ├── raw/
+│   │   ├── AAPL_raw.csv
+│   │   ├── AMZN_raw.csv
+│   │   ├── MSFT_raw.csv
+│   │   ├── NVDA_raw.csv
+│   │   └── TSLA_raw.csv
+│   └── processed/
+│       ├── AAPL_processed.csv
+│       ├── AMZN_processed.csv
+│       ├── MSFT_processed.csv
+│       ├── NVDA_processed.csv
+│       ├── TSLA_processed.csv
+│       └── stocks_clean.csv
+├── results/
+│   ├── daily_returns.csv
+│   ├── rolling_volatility_30d.csv
+│   ├── annualized_volatility.csv
+│   ├── returns_correlation.csv
+│   ├── sorted_volatility.csv
+│   ├── plot_prices.png
+│   ├── plot_rolling_volatility_30d.png
+│   ├── plot_annualized_volatility.png
+│   ├── plot_daily_returns_distribution.png
+│   └── plot_returns_correlation_heatmap.png
+├── src/
+│   ├── get_data.py
+│   ├── clean_data.py
+│   ├── run_analysis.py
+│   ├── visualize_results.py
+│   └── count_rows.py
+├── Final_Report.pdf
+├── Project_Proposal.pdf
+├── README.md
+└── requirements.txt
+```
+
+## 2. Setup Instructions
 It is recommended to run the project inside a virtual environment to keep dependencies clean.
 
+1. Create Virtual Environment
 ### **Mac / Linux**
 ```bash
 python3 -m venv venv
@@ -49,27 +91,7 @@ Install them with:
 pip install -r requirements.txt
 ```
 
-## 3. Project Structure
-DSCI510_final_project/
-│
-├── data/
-│   ├── processed/
-│   └── raw/
-│
-├── results/
-│
-├── src/
-│   ├── clean_data.py
-│   ├── count_rows.py
-│   ├── get_data.py
-│   └── visualize_results.py
-│
-├── Final_Report.pdf
-├── Project_Proposal.pdf
-├── README.md
-└── requirements.txt
-
-## 4. How to Run the Project
+## 3. How to Run the Project
 Below is the complete workflow used in this project.
 
 ### **Step 1 — Download Stock Data**
@@ -127,38 +149,26 @@ python src/visualize_results.py
 
 Plots are saved in /results/*.png.
 
-## 5. Data Retrieval Method
-The project uses the yfinance Python library, which:
-- programmatically retrieves historical daily stock data from Yahoo Finance
-- returns the data directly as Pandas DataFrames
-- allows the data to be saved as CSV files using Python scripts
+## 4. Analyses Performed
+- Daily Returns – percentage change in closing prices
+- Distribution of Returns – histogram + KDE for risk comparison
+- Rolling Volatility (30-day) – short-term risk dynamics
+- Annualized Volatility – long-term risk ranking
+- Correlation Matrix – relationships across stocks
 
-This enables a fully automated and reproducible data collection process without manual downloads.
+## 5.Key Findings (Summary)
+- TSLA and NVDA show the highest volatility (short-term and long-term).
+- MSFT and AAPL remain consistently stable.
+- AMZN sits in the middle of the volatility spectrum.
+- Correlations range 0.42–0.65, indicating moderate shared movement but also diversification value—especially from TSLA.
 
-## 6.Data Cleaning Process
-The cleaning script ensures:
-- all tickers share the same date index
-- missing data is handled (drop or forward-fill)
-- columns are standardized
-- one combined DataFrame is created for analysis
+## 6. Future Work
+- Apply predictive modeling (ARIMA, GARCH, LSTM).
+- Expand dataset across sectors for cross-industry comparison.
 
-This step prepares the dataset for stable and accurate calculations.
-
-## 7. Analysis Performed
-The analysis includes:
-- daily return calculation
-- 30-day rolling volatility
-- annualized volatility per stock
-- correlation analysis
-- comparison of stable vs. high-volatility stocks
-- identification of volatility spikes and related events 
-
-## 8. Visualizations Generated
-The visual output includes:
-- multi-stock price line chart
-- rolling volatility plot
-- correlation heatmap
-- return distribution plots
-- bar chart comparing average annualized volatility
-
-These graphs help explain volatility differences among tech companies.
+## Instructor Submission Notes
+This repository contains:
+- Full project code
+- Data pipeline
+- Analysis results
+- Final written report (PDF)
